@@ -20,21 +20,37 @@ const addNewTask = (title, description, dueDate, priority, notes, checkList) => 
 };
 
 // Remove item from array
-const deleteTask = (myProjects) => {
-    myProjects.shift()
+let deleteTask = (title) => {
+    let index = myProjects.findIndex(task => task.title === title);
+    if (index !== -1) {
+        myProjects.splice(index, 1); // Removes the task at the found index
+        console.log(`Task with title "${title}" has been deleted.`);
+    } else {
+        console.log('Task not found!');
+    }
 };
 
-// Edit array objects
+// Edit array objects by title and field
+let editTask = (title, field, newValue) => {
+    // Find the task by its title
+    let task = myProjects.find(task => task.title === title);
 
-addNewTask('Workout', 'I have to workout', '21-20-2025', 'High', 'Dont forget', 'Check it');
-addNewTask('Brush Teeth', 'Do it or else mouth smells', '21-20-2025', 'High', 'Dont forget', 'Check it');
-addNewTask('Workout', 'I have to workout', '21-20-2025', 'High', 'Dont forget', 'Check it');
-addNewTask('Workout', 'I have to workout', '21-20-2025', 'High', 'Dont forget', 'Check it');
-addNewTask('Workout', 'I have to workout', '21-20-2025', 'High', 'Dont forget', 'Check it');
-addNewTask('Workout', 'I have to workout', '21-20-2025', 'High', 'Dont forget', 'Check it');
+    if (!task) {
+        console.log('Item was not found!');
+    } else {
+        // Check if the field exists on the task object
+        if (task.hasOwnProperty(field)) {
+            task[field] = newValue; // Update the field with the new value
+        } else {
+            console.log(`Field "${field}" does not exist on the task.`);
+        }
+    }
+};
 
-console.table(myProjects);
+// Example usage
+addNewTask('Testing 123', 'I have to workout', '21-20-2025', 'High', 'Dont forget', 'Check it');
 
-deleteTask(myProjects);
+editTask('Testing 123', 'description', 'Updated description here');
+editTask('Testing 123', 'priority', 'Low');
 
-console.table(myProjects);
+console.table(myProjects); // Check updated tasks
