@@ -1,6 +1,9 @@
 // Stores all the projects 
 const projectList = [];
 
+// Store the current selected project in a variable
+let currentProject = null;
+
 // Stores all tasks
 const todoList = [];
 
@@ -11,6 +14,16 @@ class Project {
         this.title = title;
     }
 };
+
+// Helper function so that the ID is not necessary upon selecting a project
+const selectProject = (projectTitle) => {
+    const project = projectList.find(p => p.title === projectTitle);
+    if (!project) {
+        console.log("Project not found");
+        return;
+    }
+    currentProject = project;
+}
 
 // Tasks constructor
 class Todo {
@@ -29,6 +42,19 @@ const addProject = (title) => {
     const newProject = new Project(title);
     projectList.push(newProject);
 }
+
+// Add a new task to a project
+const addTodo = (title, description, dueDate, priority, notes, isDone) => {
+    if (!currentProject) {
+        console.log("No project selected.");
+        return;
+    }
+    
+    const newTodo = new Todo(title, description, dueDate, priority, notes, isDone);
+    todoList.push(newTodo);
+    currentProject.todoList.push(newTodo);
+    console.log(`Todo was added to "${currentProject.title}"`, newTodo);
+};
 
 // // Add new task
 // const addNewTask = (title, description, dueDate, priority, notes, checkList) => {
@@ -74,3 +100,7 @@ const addProject = (title) => {
 
 addProject('New Project');
 console.table(projectList);
+
+selectProject("New Project");
+addTodo('Gym', 'Going to the fitnesstudio', 'Tomorrow', 'High', 'Take water', 'not done');
+console.table(todoList);
