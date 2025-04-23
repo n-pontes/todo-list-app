@@ -1,11 +1,11 @@
 // Stores all the projects 
-const projectList = [];
+let projectList = [];
 
 // Store the current selected project in a variable
 let currentProject = null;
 
 // Stores all tasks
-const todoList = [];
+let todoList = [];
 
 // Project constructor
 class Project {
@@ -23,17 +23,18 @@ const selectProject = (projectTitle) => {
         return;
     }
     currentProject = project;
-}
+};
 
 // Tasks constructor
 class Todo {
     constructor (title, description, dueDate, priority, notes, isDone) {
         this.title = title;
         this.description = description;
-        this.dueDate = new Date (dueDate);
+        this.dueDate = new Date(dueDate);
         this.priority = priority;
         this.notes = notes;
-        this.isDone = isDone = false;
+        this.isDone = isDone ?? false;
+        this.projectId = currentProject.id; // Links to the project
     }
 };
 
@@ -52,26 +53,34 @@ const addTodo = (title, description, dueDate, priority, notes, isDone) => {
     
     const newTodo = new Todo(title, description, dueDate, priority, notes, isDone);
     todoList.push(newTodo);
-    currentProject.todoList.push(newTodo);
+
     console.log(`Todo was added to "${currentProject.title}"`, newTodo);
 };
 
-// // Add new task
-// const addNewTask = (title, description, dueDate, priority, notes, checkList) => {
-//     const newTask = new Task(title, description, dueDate, priority, notes, checkList);
-//     myProjects.push(newTask);
-// };
+// List all todos for a project
+const getTodoForProject = (projectId) => {
+    return todoList.filter (todo => todo.projectId === projectId);
+};
 
-// // Remove item from array
-// let deleteTask = (title) => {
-//     let index = myProjects.findIndex(task => task.title === title);
-//     if (index !== -1) {
-//         myProjects.splice(index, 1); // Removes the task at the found index
-//         console.log(`Task with title "${title}" has been deleted.`);
-//     } else {
-//         console.log('Task not found!');
-//     }
-// };
+// Remove a project from the list
+const deleteProject = (title) => {
+    const index = projectList.findIndex(p => p.title === title);
+    
+    if (index !== -1) {
+        const removedProject = projectList.splice(index, 1)[0]; // Remove the project and store it
+        console.log(`Project "${removedProject.title}" was successfully removed.`);
+        
+        // Remove associated tasks from todoList
+        const originalTaskCount = todoList.length;
+        todoList = todoList.filter(todo => todo.projectId !== removedProject.id);
+        console.log(`Removed ${originalTaskCount - todoList.length} associated tasks.`);
+        
+        return true;
+    } else {
+        console.log('Project not found!');
+        return false;
+    }
+};
 
 // // Edit array objects by title and field
 // let editTask = (title, field, newValue) => {
@@ -99,8 +108,18 @@ const addTodo = (title, description, dueDate, priority, notes, isDone) => {
 // console.table(myProjects); // Check updated tasks
 
 addProject('New Project');
-console.table(projectList);
-
+addProject('Make Lunch');
+addProject('Rest');
 selectProject("New Project");
-addTodo('Gym', 'Going to the fitnesstudio', 'Tomorrow', 'High', 'Take water', 'not done');
+addTodo('Gym', 'Going to the fitnesstudio', '2011-10-10', 'High', 'Take water', 'not done');
+
+selectProject("Make Lunch");
+addTodo('Pork', 'Pork roasted in the oven', '2025-11-18', 'Medium', 'Dont forget butter', 'not done');
+
+console.table(projectList);
+console.table(todoList);
+
+deleteProject('New Project');
+
+console.table(projectList);
 console.table(todoList);
