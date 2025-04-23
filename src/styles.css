@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -11,7 +12,7 @@ body {
     grid-template-areas: 
     "navbar navbar"
     "sidebar main"
-    "sidebar footer";
+    "sidebar main";
 }
 nav {
     top: 0;
@@ -20,23 +21,22 @@ nav {
     background-color: blue;
     color: white;
     padding: 1em;
+    border: 1px solid red;
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 aside {
-    height: calc(100vh - 50.4px);
-    top: 50.4px;
-    position: sticky;
+    height: calc(100vh - 60.8px);
+    top: 60.8px;
     align-self: start;
     grid-area: sidebar;
     background-color: grey;
 }
 main {
     grid-area: main;
-}
-footer {
-    grid-area: footer;
-    background: black;
-    color: white;
-    padding: 2em;
 }
 @media(max-width: 800px) {
     body {
@@ -46,8 +46,5 @@ footer {
         position: fixed;
         width: 300px;
         display: none;
-    }
-    .show {
-        display: block;
     }
 }
