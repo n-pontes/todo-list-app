@@ -1,56 +1,76 @@
 // Stores all the projects 
-const myProjects = [];
+const projectList = [];
+
+// Stores all tasks
+const todoList = [];
+
+// Project constructor
+class Project {
+    constructor (title) {
+        this.id = crypto.randomUUID(); // Generates an unique ID
+        this.title = title;
+    }
+};
 
 // Tasks constructor
-class Task {
-    constructor (title, description, dueDate, priority, notes, checkList) {
+class Todo {
+    constructor (title, description, dueDate, priority, notes, isDone) {
         this.title = title;
         this.description = description;
         this.dueDate = new Date (dueDate);
         this.priority = priority;
         this.notes = notes;
-        this.checkList = checkList;
+        this.isDone = isDone = false;
     }
 };
 
-// Add new task
-const addNewTask = (title, description, dueDate, priority, notes, checkList) => {
-    const newTask = new Task(title, description, dueDate, priority, notes, checkList);
-    myProjects.push(newTask);
-};
+// Add a new Project
+const addProject = (title) => {
+    const newProject = new Project(title);
+    projectList.push(newProject);
+}
 
-// Remove item from array
-let deleteTask = (title) => {
-    let index = myProjects.findIndex(task => task.title === title);
-    if (index !== -1) {
-        myProjects.splice(index, 1); // Removes the task at the found index
-        console.log(`Task with title "${title}" has been deleted.`);
-    } else {
-        console.log('Task not found!');
-    }
-};
+// // Add new task
+// const addNewTask = (title, description, dueDate, priority, notes, checkList) => {
+//     const newTask = new Task(title, description, dueDate, priority, notes, checkList);
+//     myProjects.push(newTask);
+// };
 
-// Edit array objects by title and field
-let editTask = (title, field, newValue) => {
-    // Find the task by its title
-    let task = myProjects.find(task => task.title === title);
+// // Remove item from array
+// let deleteTask = (title) => {
+//     let index = myProjects.findIndex(task => task.title === title);
+//     if (index !== -1) {
+//         myProjects.splice(index, 1); // Removes the task at the found index
+//         console.log(`Task with title "${title}" has been deleted.`);
+//     } else {
+//         console.log('Task not found!');
+//     }
+// };
 
-    if (!task) {
-        console.log('Item was not found!');
-    } else {
-        // Check if the field exists on the task object
-        if (task.hasOwnProperty(field)) {
-            task[field] = newValue; // Update the field with the new value
-        } else {
-            console.log(`Field "${field}" does not exist on the task.`);
-        }
-    }
-};
+// // Edit array objects by title and field
+// let editTask = (title, field, newValue) => {
+//     // Find the task by its title
+//     let task = myProjects.find(task => task.title === title);
 
-// Example usage
-addNewTask('Testing 123', 'I have to workout', '21-20-2025', 'High', 'Dont forget', 'Check it');
+//     if (!task) {
+//         console.log('Item was not found!');
+//     } else {
+//         // Check if the field exists on the task object
+//         if (task.hasOwnProperty(field)) {
+//             task[field] = newValue; // Update the field with the new value
+//         } else {
+//             console.log(`Field "${field}" does not exist on the task.`);
+//         }
+//     }
+// };
 
-editTask('Testing 123', 'description', 'Updated description here');
-editTask('Testing 123', 'priority', 'Low');
+// // Example usage
+// addNewTask('Testing 123', 'I have to workout', '21-20-2025', 'High', 'Dont forget', 'Check it');
 
-console.table(myProjects); // Check updated tasks
+// editTask('Testing 123', 'description', 'Updated description here');
+// editTask('Testing 123', 'priority', 'Low');
+
+// console.table(myProjects); // Check updated tasks
+
+addProject('New Project');
+console.table(projectList);
