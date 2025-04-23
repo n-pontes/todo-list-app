@@ -127,8 +127,36 @@ let editProject = (projectTitle, newTitle) => {
     project.title = newTitle;
 };
 
-addProject('Make Lunch');
-selectProject("Make Lunch");
+// Edit todo from a project
+
+let editTodo = (todoTitle, field, newValue) => {
+    if (!currentProject) {
+        console.log('No Project selected');
+        return;
+    }
+
+    // Find the todo within the current project
+    const todo = todoList.find(t => t.title === todoTitle && t.projectId === currentProject.id);
+
+    if (!todo) {
+        console.log('Todo not found in the selected project');
+        return;
+    }
+
+    // Check if the field exists on the todo object
+    if (!todo.hasOwnProperty(field)) {
+        console.log(`Field "${field}" does not exist on the todo.`);
+        return;
+    }
+
+    // Update the field with the new value
+    todo[field] = newValue;
+};
+
+addProject('Make Lunch'); // Adds a project with a title name
+selectProject("Make Lunch"); // Selects the project
+
+// Todo examples
 addTodo('Pork', 'Pork roasted in the oven', '2025-11-18', 'Medium', 'Dont forget butter', 'not done');
 addTodo('Chicken', 'Fried Chicken', '2022-1-22', 'Low', 'Rosemary is important', 'done');
 addTodo('Beef', 'Wagiu deep boiled', '2020-16-18', 'High', 'Too much fat be careful', 'not done');
@@ -137,8 +165,10 @@ console.table(projectList);
 console.table(todoList);
 
 deleteTodo('Pork'); // Deletes a todo from specific project
-
 console.table(todoList);
 
-editProject('Make Lunch', 'Make Dinner');
+editProject('Make Lunch', 'Make Dinner'); // Edits the project title
 console.table(projectList);
+
+editTodo('Beef', 'priority', 'Low'); // Edits a todo from a specific project
+console.table(todoList);
