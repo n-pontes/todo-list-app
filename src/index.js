@@ -54,12 +54,21 @@ const addTodo = (title, description, dueDate, priority, notes, isDone) => {
     const newTodo = new Todo(title, description, dueDate, priority, notes, isDone);
     todoList.push(newTodo);
 
-    console.log(`Todo was added to "${currentProject.title}"`, newTodo);
+    // console.log(`Todo was added to "${currentProject.title}"`, newTodo);
 };
 
 // List all todos for a project
 const getTodoForProject = (projectId) => {
     return todoList.filter (todo => todo.projectId === projectId);
+};
+
+// Explicitly returns the currently selected project
+const getCurrentProject = () => {
+    if (!currentProject) {
+        console.log("No project selected.");
+        return null;
+    }
+    return currentProject;
 };
 
 // Remove a project from the list
@@ -82,44 +91,54 @@ const deleteProject = (title) => {
     }
 };
 
-// // Edit array objects by title and field
-// let editTask = (title, field, newValue) => {
-//     // Find the task by its title
-//     let task = myProjects.find(task => task.title === title);
+// Remove a todo from a project
+const deleteTodo = (todoTitle) => {
+    if (!currentProject) {
+        console.log('Project not selected');
+        return;
+    } 
 
-//     if (!task) {
-//         console.log('Item was not found!');
-//     } else {
-//         // Check if the field exists on the task object
-//         if (task.hasOwnProperty(field)) {
-//             task[field] = newValue; // Update the field with the new value
-//         } else {
-//             console.log(`Field "${field}" does not exist on the task.`);
-//         }
-//     }
-// };
+    const todoIndex = todoList.findIndex(
+        t => t.title === todoTitle && t.projectId === currentProject.id
+    );
 
-// // Example usage
-// addNewTask('Testing 123', 'I have to workout', '21-20-2025', 'High', 'Dont forget', 'Check it');
+    if (todoIndex === -1) {
+        console.log('The todo does not exist in the selected project');
+        return;
+    }
 
-// editTask('Testing 123', 'description', 'Updated description here');
-// editTask('Testing 123', 'priority', 'Low');
+    // Remove the task from todoList
+    const removedTodo = todoList.splice(todoIndex, 1)[0];
+    console.log(`Todo "${removedTodo.title}" was successfully deleted.`);
+};
 
-// console.table(myProjects); // Check updated tasks
+// Edit array objects by title and field
+let editProject = (projectTitle, newTitle) => {
 
-addProject('New Project');
+    // Find the project by its title
+    let project = projectList.find(p => p.title === projectTitle);
+
+    if (!project) {
+        console.log('Project was not found');
+        return;
+    } 
+
+    //Update the project Title
+    project.title = newTitle;
+};
+
 addProject('Make Lunch');
-addProject('Rest');
-selectProject("New Project");
-addTodo('Gym', 'Going to the fitnesstudio', '2011-10-10', 'High', 'Take water', 'not done');
-
 selectProject("Make Lunch");
 addTodo('Pork', 'Pork roasted in the oven', '2025-11-18', 'Medium', 'Dont forget butter', 'not done');
+addTodo('Chicken', 'Fried Chicken', '2022-1-22', 'Low', 'Rosemary is important', 'done');
+addTodo('Beef', 'Wagiu deep boiled', '2020-16-18', 'High', 'Too much fat be careful', 'not done');
 
 console.table(projectList);
 console.table(todoList);
 
-deleteProject('New Project');
+deleteTodo('Pork'); // Deletes a todo from specific project
 
-console.table(projectList);
 console.table(todoList);
+
+editProject('Make Lunch', 'Make Dinner');
+console.table(projectList);
