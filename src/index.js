@@ -1,7 +1,7 @@
 // Entry point - It will initialize the app, wire everything together, and set up the initial state
 
 import { selectProject, getTodoForProject, getCurrentProject } from "./modules/utils";
-import { projectList, currentProject, todoList } from "./modules/models";
+import { projectList, currentProject, todoList } from "./modules/utils";
 import { addProject, addTodo, deleteProject, deleteTodo, editProject, editTodo } from "./modules/tasks";
 
 addProject('Make Lunch'); // Adds a project with a title name
@@ -23,3 +23,4 @@ console.table(projectList);
 
 editTodo('Beef', 'priority', 'Low'); // Edits a todo from a specific project
 console.table(todoList);
+console.table(projectList);

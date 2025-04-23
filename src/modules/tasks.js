@@ -1,6 +1,6 @@
 // This module will handle core CRUD logic for both projects and todos
 
-import { projectList, currentProject, todoList, Project, Todo } from "./models";
+import { projectList, currentProject, todoList, Project, Todo } from "./utils";
 
 // Add a new Project
 const addProject = (title) => {
