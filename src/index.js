@@ -1,3 +1,5 @@
+// Entry point - It will initialize the app, wire everything together, and set up the initial state
+
 // Stores all the projects 
 let projectList = [];
 
