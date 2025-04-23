@@ -1,5 +1,6 @@
 // Entry point - It will initialize the app, wire everything together, and set up the initial state
 
+import './styles.css';
 import { selectProject, getTodoForProject, getCurrentProject } from "./modules/utils";
 import { projectList, currentProject, todoList } from "./modules/utils";
 import { addProject, addTodo, deleteProject, deleteTodo, editProject, editTodo } from "./modules/tasks";
