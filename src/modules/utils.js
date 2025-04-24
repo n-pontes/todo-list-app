@@ -27,12 +27,17 @@ class Todo {
 
 // Helper function so that the ID is not necessary upon selecting a project
 const selectProject = (projectTitle) => {
-    const project = projectList.find(p => p.title === projectTitle);
+    console.log("Attempting to select project:", projectTitle);
+    console.log("Current project list:", projectList);
+
+    const project = projectList.find(p => p.title.trim().toLowerCase() === projectTitle.trim().toLowerCase());
     if (!project) {
-        console.log("Project not found");
+        console.log(`Project "${projectTitle}" not found`);
         return;
     }
+
     currentProject = project;
+    console.log("Selected project:", currentProject);
 };
 
 // List all todos for a project
