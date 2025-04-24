@@ -57,11 +57,18 @@ body {
     flex-direction: column;
     gap: 2rem;
 }
+.page-sidebar h3 {
+    color: var(--text-main) !important;
+}
 
 .nav-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    padding-bottom: 1rem;
+}
+.project-section h3 {
+    color: var(--text-main) !important;
 }
 
 .nav-item {
