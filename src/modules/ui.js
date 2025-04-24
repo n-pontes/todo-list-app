@@ -38,7 +38,7 @@ const initializeProjectForm = () => {
 };
 
 // Create Project Element (with inline editing)
-const createProjectElement = (projectName) => {
+export const createProjectElement = (projectName) => {
     const projectElement = document.createElement("div");
     projectElement.classList.add("project-item");
     projectElement.dataset.projectTitle = projectName;
