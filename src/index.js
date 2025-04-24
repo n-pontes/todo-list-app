@@ -25,5 +25,3 @@ import { initializeProjectForm } from './modules/ui';
 
 // editTodo('Beef', 'priority', 'Low'); // Edits a todo from a specific project
 // console.table(todoList);
-
-initializeProjectForm();

@@ -1,37 +1,24 @@
 // DOM interactions
 
-import { addProject } from './tasks.js';
+import { addProject } from './tasks';
 
-// Handle DOM manipulations
-const initializeProjectForm = () => {
-  const projectForm = document.querySelector('#project-form');
-  const projectListContainer = document.querySelector('.project-list');
-
-  // Handle project form submission
-  projectForm.addEventListener('submit', (event) => {
+document.querySelector('#project-form').addEventListener('submit', (event) => {
     event.preventDefault();
 
-    // Get project name from input
     const projectInput = document.querySelector('#project-name');
     const projectName = projectInput.value.trim();
 
     if (projectName) {
-      // Add the project using the logic layer
-      const newProject = addProject(projectName);
+        addProject(projectName);
 
-      // Update the DOM
-      const projectItem = document.createElement('div');
-      projectItem.classList.add('project-item');
-      projectItem.textContent = newProject.title;
-      projectListContainer.appendChild(projectItem);
+        // Update the DOM
+        const projectListContainer = document.querySelector('.project-list');
+        const newProjectElement = document.createElement('div');
+        newProjectElement.classList.add('project-item');
+        newProjectElement.textContent = projectName;
+        projectListContainer.appendChild(newProjectElement);
 
-      // Clear the input field
-      projectInput.value = '';
+        // Clear the input field
+        projectInput.value = '';
     }
-  });
-};
-
-// Initialize the DOM logic
-initializeProjectForm();
-
-export { initializeProjectForm };
+});
