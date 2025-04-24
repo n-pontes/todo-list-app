@@ -309,3 +309,48 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const navItems = document.querySelectorAll(".nav-item span");
+    let allTasksBtn, todayTasksBtn, importantTasksBtn;
+
+    navItems.forEach((item) => {
+        const text = item.textContent.trim();
+        if (text === "All Tasks") allTasksBtn = item.closest(".nav-item");
+        if (text === "Today") todayTasksBtn = item.closest(".nav-item");
+        if (text === "Important") importantTasksBtn = item.closest(".nav-item");
+    });
+
+    const taskListContainer = document.querySelector(".task-list");
+
+    const renderTasks = (tasks) => {
+        taskListContainer.innerHTML = ""; // Clear the task list
+        tasks.forEach((task) => {
+            const taskElement = createTaskElement(task.title, task.description, task.dueDate, task.priority);
+            taskListContainer.appendChild(taskElement);
+        });
+    };
+
+    const filterTasksByToday = () => {
+        const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+        return todoList.filter((task) => task.dueDate === today);
+    };
+
+    const filterTasksByPriority = () => {
+        return todoList.filter((task) => task.priority === "High");
+    };
+
+    allTasksBtn.addEventListener("click", () => {
+        renderTasks(todoList); // Show all tasks
+    });
+
+    todayTasksBtn.addEventListener("click", () => {
+        const todayTasks = filterTasksByToday();
+        renderTasks(todayTasks); // Show today's tasks
+    });
+
+    importantTasksBtn.addEventListener("click", () => {
+        const importantTasks = filterTasksByPriority();
+        renderTasks(importantTasks); // Show high-priority tasks
+    });
+});
