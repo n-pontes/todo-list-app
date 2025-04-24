@@ -18,13 +18,9 @@ class Project {
 };
 // Tasks constructor
 class Todo {
-    constructor (title, description, dueDate, priority, notes, isDone) {
+    constructor (title, description) {
         this.title = title;
         this.description = description;
-        this.dueDate = new Date(dueDate);
-        this.priority = priority;
-        this.notes = notes;
-        this.isDone = isDone ?? false;
         this.projectId = currentProject.id; // Links to the project
     }
 };
