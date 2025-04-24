@@ -180,25 +180,91 @@ body {
     font-size: 1.5rem;
 }
 
-/* Tasks */
-/* Tasks - Stack elements vertically */
 /* Tasks - Stack elements vertically */
 .task-card {
-    background: var(--task-bg);
-    padding: 1.2rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
+    background: #ffffff;
+    padding: 1.8rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    align-items: flex-start; /* Align content to the left */
-    gap: 1rem; /* Add spacing between elements */
-    margin-bottom: 1.2rem;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1.6rem;
+    border: 1px solid #e5e7eb;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
+
+.task-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    border-color: var(--accent);
+}
+.task-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.task-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.3px;
+}
+
+.task-desc {
+    font-size: 1rem;
+    color: var(--text-sub);
+}
+.task-due-date,
+.task-priority {
+    font-size: 0.9rem;
+    color: var(--text-sub);
+}
+/* Action area */
 .task-actions {
-    align-self: flex-end; /* Align buttons to the right */
     display: flex;
-    gap: 0.5rem;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding-top: 0.25rem;
 }
+
+/* Modern soft button look */
+.edit-task-btn,
+.delete-task-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    color: #fff;
+}
+
+.edit-task-btn {
+    background-color: var(--accent);
+}
+
+.edit-task-btn:hover {
+    background-color: var(--accent-dark);
+    transform: scale(1.05);
+}
+
+.delete-task-btn {
+    background-color: var(--cancel);
+}
+
+.delete-task-btn:hover {
+    background-color: #e11d48;
+    transform: scale(1.05);
+}
+
 #project-form {
     margin-bottom: 1.5rem; /* Add spacing between the form and projects */
 }
@@ -212,10 +278,6 @@ body {
     color: var(--text-sub);
 }
 
-.task-actions {
-    display: flex;
-    gap: 0.5rem;
-}
 .form-box {
     display: none; /* Initially hidden */
     transition: all 0.3s ease-in-out;
@@ -346,8 +408,7 @@ body {
     gap: 10px;
     justify-content: center;
     font-size: 0.9rem;
-    padding: 0.4rem;
-    color: #444;
+    padding: 0.3rem;
 }
 
 /* Initially hide the form */
