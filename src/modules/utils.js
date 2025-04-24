@@ -18,9 +18,11 @@ class Project {
 };
 // Tasks constructor
 class Todo {
-    constructor (title, description) {
+    constructor (title, description, dueDate, priority) {
         this.title = title;
         this.description = description;
+        this.dueDate = dueDate;
+        this.priority = priority;
         this.projectId = currentProject.id; // Links to the project
     }
 };
@@ -50,7 +52,7 @@ const getCurrentProject = () => {
     if (!currentProject) {
         console.log("No project selected.");
         return null;
-    }
+    }   
     return currentProject;
 };
 

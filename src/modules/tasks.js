@@ -9,13 +9,13 @@ const addProject = (title) => {
 }
 
 // Add a new task to a project
-const addTodo = (title, description) => {
+const addTodo = (title, description, dueDate, priority) => {
     if (!currentProject) {
         console.log("No project selected.");
         return;
     }
     
-    const newTodo = new Todo(title, description);
+    const newTodo = new Todo(title, description, dueDate, priority);
     todoList.push(newTodo);
 
     // console.log(`Todo was added to "${currentProject.title}"`, newTodo);
