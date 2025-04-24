@@ -3,7 +3,8 @@ import {
     addTodo, 
     deleteProject, 
     deleteTodo, 
-    editProject
+    editProject,
+    editTodo
 } from './tasks';
 
 import { 
@@ -211,24 +212,29 @@ const createTaskElement = (title, description) => {
 
 // Update Task List
 const updateTaskList = () => {
-    const taskListContainer = document.querySelector(".task-list");
-    const currentProject = getCurrentProject();
+    const taskListContainer = document.querySelector(".task-list"); // Task list container
+    const headerTitle = document.querySelector("h2"); // The <h2> element with "All Tasks" text
+    const currentProject = getCurrentProject(); // Get the currently selected project
 
-    if (!currentProject) {
-        taskListContainer.innerHTML =
-            "<p>No project selected. Select a project to view tasks.</p>";
+    if (!headerTitle) {
+        console.error("<h2> element for the task list header not found.");
         return;
     }
+
+    if (!currentProject) {
+        // No project selected
+        taskListContainer.innerHTML = ""; // Clear the task list
+        headerTitle.textContent = "Select a Project"; // Default message
+        return;
+    }
+
+    // Update the header title to the selected project name
+    headerTitle.textContent = currentProject.title;
 
     const tasks = getTodoForProject(currentProject.id);
 
     // Clear existing tasks from the DOM
     taskListContainer.innerHTML = "";
-
-    if (tasks.length === 0) {
-        taskListContainer.innerHTML = "";
-        return;
-    }
 
     // Add tasks to the DOM
     tasks.forEach((task) => {
