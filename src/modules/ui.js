@@ -10,7 +10,9 @@ import {
 import { 
         selectProject, 
         getTodoForProject, 
-        getCurrentProject
+        getCurrentProject,
+        Todo,
+        todoList
 } from './utils'
 
 // Initialize Project Form
@@ -111,32 +113,37 @@ const initializeTaskForm = () => {
 
         const taskTitle = document.querySelector("#task-title").value.trim();
         const taskDesc = document.querySelector("#task-desc").value.trim();
+        const taskDueDate = document.querySelector("#task-due-date").value; // Capture due date
+        const taskPriority = document.querySelector("#task-priority").value; // Capture priority
 
         if (taskTitle) {
             const currentProject = getCurrentProject();
             if (!currentProject) {
-                taskListContainer.innerHTML =
-                    "<p class='error'>No project selected! Please select a project to add tasks.</p>";
+                alert("No project selected.");
                 return;
             }
 
-            addTodo(taskTitle, taskDesc);
+            const newTask = new Todo(taskTitle, taskDesc, taskDueDate, taskPriority);
+            todoList.push(newTask); // Add task to the global task list
 
-            // Add to DOM
-            const newTaskElement = createTaskElement(taskTitle, taskDesc);
-            taskListContainer.appendChild(newTaskElement);
+            // Render the new task in the DOM
+            const taskElement = createTaskElement(taskTitle, taskDesc, taskDueDate, taskPriority);
+            taskListContainer.appendChild(taskElement);
+
+            // Reset form fields
+            taskForm.reset();
         }
     });
 };
-
-// Create Task Element (with inline editing)
-const createTaskElement = (title, description) => {
+const createTaskElement = (title, description, dueDate, priority) => {
     const taskElement = document.createElement("div");
     taskElement.classList.add("task-card");
     taskElement.innerHTML = `
         <div class="task-info">
             <h3 class="task-title">${title}</h3>
             <p class="task-desc">${description}</p>
+            <p class="task-due-date">Due: ${dueDate}</p>
+            <p class="task-priority">Priority: ${priority}</p>
         </div>
         <div class="task-actions">
             <button class="edit-task-btn">Edit</button>
@@ -148,6 +155,8 @@ const createTaskElement = (title, description) => {
     taskElement.querySelector(".edit-task-btn").addEventListener("click", () => {
         const titleElement = taskElement.querySelector(".task-title");
         const descElement = taskElement.querySelector(".task-desc");
+        const dueDateElement = taskElement.querySelector(".task-due-date");
+        const priorityElement = taskElement.querySelector(".task-priority");
 
         const titleInput = document.createElement("input");
         titleInput.type = "text";
@@ -158,6 +167,21 @@ const createTaskElement = (title, description) => {
         descInput.value = description;
         descInput.classList.add("edit-input");
 
+        const dueDateInput = document.createElement("input");
+        dueDateInput.type = "date";
+        dueDateInput.value = dueDate;
+        dueDateInput.classList.add("edit-input");
+
+        const priorityInput = document.createElement("select");
+        ["Low", "Medium", "High"].forEach(level => {
+            const option = document.createElement("option");
+            option.value = level;
+            option.textContent = level;
+            if (level === priority) option.selected = true;
+            priorityInput.appendChild(option);
+        });
+        priorityInput.classList.add("edit-input");
+
         const saveButton = document.createElement("button");
         saveButton.textContent = "Save";
         saveButton.classList.add("save-task-btn");
@@ -166,8 +190,13 @@ const createTaskElement = (title, description) => {
         cancelButton.textContent = "Cancel";
         cancelButton.classList.add("cancel-task-btn");
 
-        // Replace title and description with inputs
-        taskElement.querySelector(".task-info").replaceChildren(titleInput, descInput);
+        // Replace elements with inputs
+        taskElement.querySelector(".task-info").replaceChildren(
+            titleInput,
+            descInput,
+            dueDateInput,
+            priorityInput
+        );
         taskElement.querySelector(".edit-task-btn").style.display = "none";
         taskElement.querySelector(".task-actions").appendChild(saveButton);
         taskElement.querySelector(".task-actions").appendChild(cancelButton);
@@ -176,15 +205,26 @@ const createTaskElement = (title, description) => {
         saveButton.addEventListener("click", () => {
             const newTitle = titleInput.value.trim();
             const newDesc = descInput.value.trim();
+            const newDueDate = dueDateInput.value;
+            const newPriority = priorityInput.value;
 
-            if (newTitle && newDesc) {
+            if (newTitle && newDesc && newDueDate && newPriority) {
                 editTodo(title, "title", newTitle);
                 editTodo(newTitle, "description", newDesc);
+                editTodo(newTitle, "dueDate", newDueDate);
+                editTodo(newTitle, "priority", newPriority);
 
                 titleElement.textContent = newTitle;
                 descElement.textContent = newDesc;
+                dueDateElement.textContent = `Due: ${newDueDate}`;
+                priorityElement.textContent = `Priority: ${newPriority}`;
 
-                taskElement.querySelector(".task-info").replaceChildren(titleElement, descElement);
+                taskElement.querySelector(".task-info").replaceChildren(
+                    titleElement,
+                    descElement,
+                    dueDateElement,
+                    priorityElement
+                );
             }
 
             saveButton.remove();
@@ -194,7 +234,12 @@ const createTaskElement = (title, description) => {
 
         // Cancel editing
         cancelButton.addEventListener("click", () => {
-            taskElement.querySelector(".task-info").replaceChildren(titleElement, descElement);
+            taskElement.querySelector(".task-info").replaceChildren(
+                titleElement,
+                descElement,
+                dueDateElement,
+                priorityElement
+            );
             saveButton.remove();
             cancelButton.remove();
             taskElement.querySelector(".edit-task-btn").style.display = "inline";
@@ -247,4 +292,20 @@ const updateTaskList = () => {
 document.addEventListener("DOMContentLoaded", () => {
     initializeProjectForm();
     initializeTaskForm();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const toggleFormBtn = document.querySelector("#toggle-form-btn");
+    const taskFormBox = document.querySelector("#task-form-box");
+
+    // Initially hide the form
+    taskFormBox.style.display = "none";
+
+    toggleFormBtn.addEventListener("click", () => {
+        if (taskFormBox.style.display === "none") {
+            taskFormBox.style.display = "block"; // Show the form
+        } else {
+            taskFormBox.style.display = "none"; // Hide the form
+        }
+    });
 });

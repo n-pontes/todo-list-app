@@ -122,7 +122,41 @@ body {
     transition: background var(--transition);
     margin-bottom: 0.6rem;
 }
+#task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: var(--bg-main);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-top: 1.5rem;
+}
 
+#task-form input,
+#task-form textarea,
+#task-form select {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+#task-form button {
+    align-self: flex-start;
+    background: var(--accent);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#task-form button:hover {
+    background: var(--accent-dark);
+}
 .project-item:hover {
     background: var(--bg-active);
 }
@@ -174,6 +208,33 @@ body {
 .task-actions {
     display: flex;
     gap: 0.5rem;
+}
+.form-box {
+    display: none; /* Initially hidden */
+    transition: all 0.3s ease-in-out;
+    background: white;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    margin-top: 1rem;
+}
+
+.form-box.show {
+    display: block; /* Show when toggled */
+}
+.toggle-form-btn {
+    background: var(--accent);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-bottom: 1rem;
+}
+
+.toggle-form-btn:hover {
+    background: var(--accent-dark);
 }
   
 .edit-btn, .delete-btn {
