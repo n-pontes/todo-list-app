@@ -226,7 +226,7 @@ const updateTaskList = () => {
     taskListContainer.innerHTML = "";
 
     if (tasks.length === 0) {
-        taskListContainer.innerHTML = "<p>No tasks for this project.</p>";
+        taskListContainer.innerHTML = "";
         return;
     }
 

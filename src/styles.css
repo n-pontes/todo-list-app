@@ -3,6 +3,8 @@
     --bg-sidebar: #f3f4f6;
     --bg-active: #e0e7ff;
     --accent: #6366f1;
+    --confirm: #63f17b;
+    --cancel: #f16363;
     --accent-dark: #4f46e5;
     --text-main: #111827;
     --text-sub: #6b7280;
@@ -175,15 +177,79 @@ body {
     cursor: pointer;
     transition: background var(--transition);
 }
-  
+
 .edit-btn {
     background: var(--accent);
     color: white;
 }
-  
+.project-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: space-around;
+}
+.edit-project-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    background-color: var(--accent);
+    transition: background var(--transition);
+} 
+.edit-input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    width: 50%;
+    border-radius: 8px;
+}
+.save-project-btn {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: var(--confirm);
+    font-size: 0.5em;
+}
+.cancel-project-btn {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: var(--cancel);
+    font-size: 0.5em;
+}
 .delete-btn {
     background: #ef4444;
     color: white;
+}
+.task-info {
+    display: flex;
+    flex-direction: column;
+}
+.edit-task-btn {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: var(--confirm);
+}
+.save-task-btn {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: var(--confirm);
+}
+.cancel-task-btn {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: var(--cancel);
+}
+
+.delete-task-btn {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: var(--cancel); 
 }
   
 .edit-btn:hover {
@@ -213,7 +279,6 @@ body {
 .form-box.show {
     display: block;
 }
-  
 
 .form {
     display: flex;
@@ -221,8 +286,13 @@ body {
     gap: 0.5rem;
     margin-top: 1rem;
 }
-  
+
 .form input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+#task-desc {
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 8px;
