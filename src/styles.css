@@ -41,13 +41,20 @@ body {
 /* Header */
 .page-header {
     grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
     background: var(--accent);
     color: white;
     text-align: center;
     font-size: 1.5rem;
     padding: 1.2rem;
+    border: 1px solid red;
 }
-
+.logo {
+    width: 55.2px;
+    height: 55.2px;
+}
 /* Sidebar */
 .page-sidebar {
     background: var(--bg-sidebar);
