@@ -68,4 +68,4 @@ navItems.forEach(item => {
     // Add 'active' class to the clicked nav item
     item.classList.add('active');
   });
-});
+}); 

@@ -59,6 +59,7 @@ https://n-pontes.github.io/todo-list-app/
 + **JavaScript (ES6)** – Dynamic functionality and modular architecture.
 + **Lucide Icons** – SVG-based icons for a modern UI.
 + **Webpack** – Module bundler for optimized asset management.
++ **ESLint** – Code linting to enforce consistent style and catch errors early.
 
 ### Tools
 
