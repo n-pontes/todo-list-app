@@ -20,12 +20,12 @@ Taskive is a dynamic and responsive to-do list application designed to help user
 
 ## Learning Outcomes
 
-+ Strengthened my understanding of DOM manipulation and event-driven programming.
-+ Improved problem-solving skills through debugging and optimizing dynamic UI components.
++ Strengthened my understanding of DOM manipulation and handling events in JavaScript.
++ Learned a lot from debugging and tweaking the UI to make it work smoothly.
 + Enhanced my ability to work with modern JavaScript libraries, such as Lucide, for SVG icons.
 + Learned to manage CSS layouts, including Flexbox and transitions, for polished designs.
-+ Gained experience in configuring and using Webpack for module bundling.
-+ Improved my workflow by leveraging npm scripts for development and production tasks.
++ Set up Webpack to bundle everything together — finally starting to get how it all fits.
++ Used npm scripts to speed things up during development and make building for production easier.
 
 ---
 
@@ -40,13 +40,13 @@ Taskive is a dynamic and responsive to-do list application designed to help user
 
 ## Live Demo
 
-_(Coming Soon)_
+https://n-pontes.github.io/todo-list-app/
 
 ---
 
 ## Screenshots
 
-_(Coming Soon)_
+<img src="./src/images/mockup.jpeg" width="758">
 
 ---
 
