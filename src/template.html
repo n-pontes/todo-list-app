@@ -1,82 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Taskive</title>
-  <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body>
-  <div class="page-wrap">
-    <header class="page-header">
-      <i data-lucide="list-end" class="logo"></i><h1>Taskive</h1>
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taskive</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body>
+    <div class="page-wrap">
+      <header class="page-header">
+        <i data-lucide="list-end" class="logo"></i>
+        <h1>Taskive</h1>
+      </header>
 
-    <aside class="page-sidebar">
-      <h3>Home</h3>
-      <div class="side-container">
-        <div class="nav-group">
-          <div class="nav-item">
-            <i data-lucide="book-open-check"></i>
-            <span>All Tasks</span>
+      <aside class="page-sidebar">
+        <h3>Home</h3>
+        <div class="side-container">
+          <div class="nav-group">
+            <div class="nav-item">
+              <i data-lucide="book-open-check"></i>
+              <span>All Tasks</span>
+            </div>
+            <div class="nav-item">
+              <i data-lucide="calendar-days"></i>
+              <span>Today</span>
+            </div>
+            <div class="nav-item">
+              <i data-lucide="star"></i>
+              <span>Important</span>
+            </div>
           </div>
-          <div class="nav-item">
-            <i data-lucide="calendar-days"></i>
-            <span>Today</span>
-          </div>
-          <div class="nav-item">
-            <i data-lucide="star"></i>
-            <span>Important</span>
+
+          <div class="project-section">
+            <h3>Projects</h3>
+            <form id="project-form" class="form">
+              <input
+                type="text"
+                id="project-name"
+                placeholder="Project name..."
+                required
+              />
+              <button type="submit">Add Project</button>
+            </form>
+            <div class="project-list"></div>
           </div>
         </div>
+      </aside>
 
-        <div class="project-section">
-          <h3>Projects</h3>
-          <form id="project-form" class="form">
-            <input type="text" id="project-name" placeholder="Project name..." required />
-            <button type="submit">Add Project</button>
-          </form>          
-          <div class="project-list">
+      <main class="page-main">
+        <div class="content">
+          <h2>---</h2>
+          <div class="task-list">
+            <!-- Tasks will be dynamically added here -->
           </div>
-        </div>
-      </div>
-    </aside>
 
-    <main class="page-main">
-      <div class="content">
-        <h2>---</h2>
-        <div class="task-list">
-          <!-- Tasks will be dynamically added here -->
-        </div>
-
-        <div class="task-section">
-          <h3></h3>
-          <button id="toggle-form-btn" class="toggle-form-btn">+ New Task</button> <!-- Button to toggle form -->
-          <div class="form-box" id="task-form-box"> <!-- Wrapper for the form -->
+          <div class="task-section">
+            <h3></h3>
+            <button id="toggle-form-btn" class="toggle-form-btn">
+              + New Task
+            </button>
+            <!-- Button to toggle form -->
+            <div class="form-box" id="task-form-box">
+              <!-- Wrapper for the form -->
               <form id="task-form" class="form">
-                  <input type="text" id="task-title" placeholder="Task title..." required />
-                  <textarea id="task-desc" placeholder="Task description..." rows="3"></textarea>
-                  <input type="date" id="task-due-date" required />
-                  <select id="task-priority">
-                      <option value="Low">Low</option>
-                      <option value="Medium">Medium</option>
-                      <option value="High">High</option>
-                  </select>
-                  <button type="submit">Add Task</button>
+                <input
+                  type="text"
+                  id="task-title"
+                  placeholder="Task title..."
+                  required
+                />
+                <textarea
+                  id="task-desc"
+                  placeholder="Task description..."
+                  rows="3"
+                ></textarea>
+                <input type="date" id="task-due-date" required />
+                <select id="task-priority">
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                </select>
+                <button type="submit">Add Task</button>
               </form>
+            </div>
           </div>
-      </div>
-      </div>
-    </main>
-    <footer class="page-footer">
-      <p>Copyright © 2025 n-pontes</p>
+        </div>
+      </main>
+      <footer class="page-footer">
+        <p>Copyright © 2025 n-pontes</p>
         <a href="https://github.com/n-pontes">
-            <img src="./images/favicon.png" alt="GitHub link" class="git">
+          <img src="./images/favicon.png" alt="GitHub link" class="git" />
         </a>
-    </footer>
-  </div>
-  <script>
-    lucide.createIcons();
-  </script>
-</body>
+      </footer>
+    </div>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
 </html>
